@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SCH@Damgigo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/timeline.css">
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  
+  <style>
+    @import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+    body,h1,h2,h3,h4,h5,h6 {
+      font-family: "Nanum Gothic", "Raleway", sans-serif !important;
+    }
+    body, html {
+        height: 100%;
+        line-height: 1.8;
+    }
+    
+    .w3-bar .w3-button {
+        padding: 16px;
+    }
+    a {
+      text-decoration:none !important;
+    }
+  </style>
+</head>
+<body>
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-theme w3-card-2" id="myNavbar">
+    <a href="/" class="w3-bar-item w3-button w3-wide">SCH@Damgigo</a>
+    <!-- Right-sided navbar links -->
+    <div class="w3-right w3-hide-small">
+      <%= link_to raw("<i class='fa fa-home'></i> HOME"), root_path, class: "w3-bar-item w3-button"  %>
+      <%= link_to raw("<i class='fa fa-pencil'></i> NEW POST"), new_post_path, class: "w3-bar-item w3-button"  %>
+      <% if user_signed_in? %>
+        <%= link_to raw("<i class='fa fa-sign-out'></i> SIGN OUT"), destroy_user_session_path, method: 'delete', class: "w3-bar-item w3-button"  %>
+      <% else %>
+        <%= link_to raw("<i class='fa fa-user-o'></i> SIGN IN"), new_user_session_path, class: "w3-bar-item w3-button" %>
+      <% end %>
+    </div>
+    <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+</div>
+
+<!-- Sidebar on small screens when clicking the menu icon -->
+<nav class="w3-sidebar w3-bar-block w3-theme w3-card-2 w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16 w3-right">Close ×</a>
+  <%= link_to raw("<i class='fa fa-home'></i> HOME"), root_path, class: "w3-bar-item w3-button"  %>
+  <%= link_to raw("<i class='fa fa-pencil'></i> NEW POST"), new_post_path, class: "w3-bar-item w3-button"  %>
+  <% if user_signed_in? %>
+    <%= link_to raw("<i class='fa fa-sign-out'></i> SIGN OUT"), destroy_user_session_path, method: 'delete', class: "w3-bar-item w3-button"  %>
+  <% else %>
+    <%= link_to raw("<i class='fa fa-user-o'></i> SIGN IN"), new_user_session_path, class: "w3-bar-item w3-button" %>
+  <% end %>
+</nav>
+
+<%= yield %>
+
+<!-- Script for Sidebar, Tabs, Accordions, Progress bars and slideshows -->
+<script>
+  // Side navigation
+  function w3_open() {
+      var x = document.getElementById("mySidebar");
+      x.style.width = "100%";
+      x.style.fontSize = "40px";
+      x.style.paddingTop = "10%";
+      x.style.display = "block";
+  }
+  function w3_close() {
+      document.getElementById("mySidebar").style.display = "none";
+  }
+  
+  // Tabs
+  function openCity(evt, cityName) {
+    var i;
+    var x = document.getElementsByClassName("city");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";
+    }
+    var activebtn = document.getElementsByClassName("testbtn");
+    for (i = 0; i < x.length; i++) {
+        activebtn[i].className = activebtn[i].className.replace(" w3-dark-grey", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " w3-dark-grey";
+  }
+  
+  var mybtn = document.getElementsByClassName("testbtn")[0];
+  //mybtn.click();
+  
+  // Accordions
+  function myAccFunc(id) {
+      var x = document.getElementById(id);
+      if (x.className.indexOf("w3-show") == -1) {
+          x.className += " w3-show";
+      } else { 
+          x.className = x.className.replace(" w3-show", "");
+      }
+  }
+  
+  // Slideshows
+  var slideIndex = 1;
+  
+  function plusDivs(n) {
+  slideIndex = slideIndex + n;
+  showDivs(slideIndex);
+  }
+  
+  function showDivs(n) {
+    var x = document.getElementsByClassName("mySlides");
+    if (n > x.length) {slideIndex = 1}    
+    if (n < 1) {slideIndex = x.length} ;
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";  
+    }
+    x[slideIndex-1].style.display = "block";  
+  }
+  
+  //showDivs(1);
+  
+  // Progress Bars
+  function move() {
+    var elem = document.getElementById("myBar");   
+    var width = 5;
+    var id = setInterval(frame, 10);
+    function frame() {
+      if (width == 100) {
+        clearInterval(id);
+      } else {
+        width++; 
+        elem.style.width = width + '%'; 
+        elem.innerHTML = width * 1  + '%';
+      }
+    }
+  }
+</script>
+</body>
+</html>

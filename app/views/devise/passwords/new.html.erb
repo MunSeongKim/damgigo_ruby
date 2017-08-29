@@ -1,0 +1,46 @@
+<style>
+/* Bordered form */
+form {
+    border: 3px solid #f1f1f1;
+}
+
+/* Full-width inputs */
+input[type=email], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    color: black;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+
+span.hint {
+  display: block;
+  float: right;
+  font-size: 0.8em;
+  color: red;
+}
+</style>
+
+<div class="w3-display-middle w3-text-theme">
+  <h2 class="w3-xxlarge w3-hide-large w3-hide-medium" style="text-shadow:1px 1px 0 #006e51">Password reset</h2>
+  <h2 class="w3-jumbo w3-hide-small" style="text-shadow:1px 1px 0 #006e51">Password reset</h2>
+  <div class="w3-card-4">
+      
+      <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <div class="w3-container w3-margin w3-jumbo w3-hide-small w3-center"><i class="fa fa-user"></i></div>
+      <div class="w3-container form-inputs">
+        <%= f.input :email, required: true, autofocus: true %>
+      </div>
+    
+      <div class="w3-container w3-center w3-padding form-actions">
+        <%= f.button :submit, "새로운 비밀번호를 전송합니다.", class: "w3-block w3-button w3-theme" %>
+      </div>
+    <% end %>
+    <div class="w3-container w3-center w3-padding-large">
+      <%= render "devise/shared/links" %>  
+    </div>
+  </div>
+</div>

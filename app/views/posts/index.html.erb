@@ -1,0 +1,26 @@
+<!-- Posts section -->
+<div class="w3-container" style="padding:30px 45px; margin-top: 40px;">
+  <div class="w3-row">
+    <h3 class="w3-left">프로젝트</h3>
+    <p class="w3-left w3-large w3-margin-left">- 다양한 프로젝트를 살펴보세요</p>
+    <div class="w3-right w3-padding-large">
+      <%= link_to raw('<i class="fa fa-arrow-circle-left"></i> Back'), posts_path, class: "w3-btn w3-hover-opacity w3-round-xxlarge", onclick: "javascript:history.back();" %>
+    </div>
+    <div class="w3-row-padding" style="margin-top:64px">
+      <% @posts.each do |post| %>  
+      <div class="w3-col l3 m6 w3-margin-bottom">
+        <%= link_to post do %>
+        <div class="w3-card-2">
+        <%= image_tag "#{post.image.url(:small)}", style: 'width:100%' %>
+          <div class="w3-container">
+            <h3><%= post.title %></h3>
+            <p class="w3-opacity"><%= post.user.email %></p>
+            <p><%= post.desc %></p>
+          </div>
+        </div>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

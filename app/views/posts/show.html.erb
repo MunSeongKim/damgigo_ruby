@@ -1,0 +1,41 @@
+<!-- Posts section -->
+
+<div class="w3-container" style="padding:30px 45px; margin-top: 40px;">
+  <div class="w3-row">
+    <div class="w3-content w3-card-4">
+      <div class="w3-panel">
+        <h1 class="w3-padding w3-left"><strong><%= @post.title %></strong></h1>
+        <p class="w3-padding w3-large w3-left w3-opacity"><%= @email %></p>
+        <div class="w3-right w3-padding-large">
+          <% if user_signed_in? && current_user.id == @post.user_id %>
+            <%= link_to raw('<i Class="fa fa-pencil-square-o"></i> Edit'), edit_post_path(@post), class: "w3-btn w3-hover-opacity w3-round-xxlarge" %>
+            <%= link_to raw('<i Class="fa fa-close"></i> Delete'), post_path(@post),
+                        method: :delete, data: { confirm: 'Are you sure?' }, class: "w3-btn w3-hover-opacity w3-round-xxlarge" %></td>
+          <% end %>
+          <%= link_to raw('<i class="fa fa-arrow-circle-left"></i> Back'), URI(request.referer).path, class: "w3-btn w3-hover-opacity w3-round-xxlarge" %>
+        </div>
+      </div>
+      <div class="w3-container">
+        <div class="w3-row">
+          <p><%= @post.desc %></p>
+          <p><%= link_to image_tag(@post.image.url(:original), class: "w3-image"), @post.image.url %></p>
+          <hr>  
+          <p><strong>Content:</strong><%= @post.content %></p>
+        </div>
+        <hr class="w3-border" />
+        
+        <div class="w3-row">
+          <div class="w3-panel ">
+          <%= render 'comments/form' %>
+          </div>
+        </div>
+        <hr>
+        <div class="w3-row">
+          <div class="w3-content w3-padding-large">
+            <%= render :template => 'comments/index' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

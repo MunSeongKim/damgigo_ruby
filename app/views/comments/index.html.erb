@@ -1,0 +1,20 @@
+<h6><strong>Comments</strong></h6>
+
+<div class="container">
+  <% @comments.each do |comment| %>
+	<div class="timeline-item" date-is="<%= comment.created_at.strftime("%Y-%m-%d %a %p %I:%M:%S") %>">
+		<p><strong><%= comment.user.email %></strong></p>
+		<p>
+			<%= comment.comment %>
+		</p>
+		<div class="w3-row">
+		  <div class='w3-right'>
+  		  <% if user_signed_in? && current_user.id == comment.user_id %>
+          <%= link_to raw('<i Class="fa fa-close"></i> Delete'), comment,
+                      method: :delete, data: { confirm: 'Are you sure?' }, class: "w3-btn w3-hover-opacity w3-round-xxlarge" %></td>
+        <% end %>
+      </div>
+    </div>
+	</div>
+	<% end %>
+</div>

@@ -1,0 +1,50 @@
+<style>
+  /* Full height image header */
+    .bgimg-1 {
+        background-position: center;
+        background-size: cover;
+        background-image: url("img/header.jpg");
+        min-height: 30%;
+    }
+    
+    body {
+      background-color: #009688;
+    }
+</style>
+
+
+
+<!-- Header with full-height image -->
+<header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
+  <div class="w3-display-top w3-center w3-text-white" style="padding:110px 45px 80px 45px">
+    <span class="w3-jumbo w3-hide-small" style="text-shadow:3px 3px 0 #006e51"><strong>SCH@Damgigo</strong></span><br>
+    <span class="w3-xxlarge w3-hide-large w3-hide-medium" style="text-shadow:2px 2px 0 #006e51"><strong>SCH@Damgigo</strong></span><br>
+    <span class="w3-large" style="text-shadow:1px 1px 0 #006e51">학생들의 열정을 응원합니다. 학생 활동 크라우드 펀딩. 담기고.</span>
+    <p><a href="#" class="w3-btn w3-theme-d1 w3-padding-large w3-large w3-margin-top w3-hover-opacity-off">Damgigo?</a></p>
+  </div> 
+</header>
+
+<!-- Posts section -->
+<div class="w3-container w3-theme" style="padding:30px 45px;" id="team">
+  <h3 class="w3-left"><strong>프로젝트</strong></h3>
+  <p class="w3-left w3-large w3-margin-left">학생들의 꿈에 기부하고 리워드를 받아보세요</p>
+  <a href="/posts" class="w3-right w3-button">더보기 <i class="fa fa-angle-double-right"></i></a>
+  
+  <div class="w3-row-padding" style="margin-top:64px">
+    <% @posts.each do |post| %>  
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <%= link_to post do %>
+      <div class="w3-card-4 w3-hover-grayscale w3-white">
+      <%= image_tag "#{post.image.url(:small)}", style: 'width:100%' %>
+        <div class="w3-container">
+          <h3><%= post.title %></h3>
+          <p class="w3-opacity"><%= post.user.email %></p>
+          <p><%= post.desc %></p>
+        </div>
+      </div>
+      <% end %>
+    </div>
+    <% end %>
+    
+  </div>
+</div>
