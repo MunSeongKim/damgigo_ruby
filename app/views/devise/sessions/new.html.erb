@@ -20,21 +20,30 @@ input[type=email], input[type=password] {
 }
 </style>
 
-<div class="w3-display-middle w3-text-theme">    
+<div class="w3-display-middle w3-text-theme w3-mobile" style="width: 20%">    
     <h2 class="w3-xxlarge w3-hide-large w3-hide-medium" style="text-shadow:1px 1px 0 #006e51">Sign in</h2>
     <h2 class="w3-jumbo w3-hide-small" style="text-shadow:1px 1px 0 #006e51">Sign in</h2>
     <div class="w3-card-4">
         
-        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "w3-row"}) do |f| %>
         <div class="w3-container w3-margin w3-jumbo w3-hide-small w3-center"><i class="fa fa-user"></i></div>
         <div class="w3-container form-inputs">
-            <%= f.input :email, required: false, autofocus: true, placeholder: "Enter E-mail account"%>
-            <%= f.input :password, required: false, placeholder: "Enter password" %>
-            <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+            <div class="w3-padding">
+            <%= f.label :email %>
+            <%= f.text_field :email, class: "w3-input w3-hover-shadow", required: false, autofocus: true, placeholder: "Enter E-mail account" %>
+            </div>
+            <div class="w3-padding">
+            <%= f.label :password %>
+            <%= f.text_field :password, class: "w3-input w3-hover-shadow", required: false, placeholder: "Enter password" %>
+            </div>
+            <div class="w3-right w3-padding">
+                <%= f.label :remeber_me, '로그인 상태 유지' %>
+                <%= f.check_box :remember_me, as: :boolean if devise_mapping.rememberable? %>
+            </div>
         </div>
       
         <div class="w3-container w3-center w3-padding form-actions">
-          <%= f.button :submit, "로그인", class: "w3-block w3-button w3-theme" %>
+          <%= f.submit "로그인", class: "w3-block w3-button w3-theme" %>
         </div>
       <% end %>
       <div class="w3-container w3-center w3-padding-large">
